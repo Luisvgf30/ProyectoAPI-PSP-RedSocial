@@ -57,6 +57,25 @@ public class PublicacionController {
         return listaPublicacionesDto;
     }
 
+    // Obtener la publicacion por ID de un usuario por su ID
+    @GetMapping("/usuarios/{UsuarioId}/publicaciones/{publicacionId}")
+    List<GetPublicacionDto> getPublicacionIdByUsuarioId(@NonNull @Valid @PathVariable Long id) {
+        usuarioRepository
+            .findById(id)
+            .orElseThrow(() -> new UsuarioNotFoundException(id));
+
+        List<Publicacion> listaPublicaciones = publicacionRepository.findByUsuarioId(id);
+        List<GetPublicacionDto> listaPublicacionesDto = new ArrayList<GetPublicacionDto>();
+
+        for (Publicacion publicacion : listaPublicaciones) {
+            if(publicacion.getId().equals(id)){
+                listaPublicacionesDto.add(publicacionMappers.toGetPublicacionDto(publicacion));
+            }
+        }
+
+        return listaPublicacionesDto;
+    }
+
     // Crear una publicacion nueva para un usuario por su ID
     @PostMapping("/usuarios/{id}/publicaciones")
     GetPublicacionDto postPublicacion(
