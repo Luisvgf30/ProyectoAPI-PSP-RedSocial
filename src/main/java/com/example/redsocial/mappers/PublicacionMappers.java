@@ -9,6 +9,7 @@ import com.example.redsocial.entities.Publicacion;
 
 @Component
 public class PublicacionMappers {
+    
     public GetPublicacionDto toGetPublicacionDto(Publicacion publicacion) {
         return new GetPublicacionDto(
           publicacion.getId(),
@@ -21,9 +22,7 @@ public class PublicacionMappers {
     public Publicacion toPublicacion(Usuario usuario, CreatePublicacionDto publicacionDto ) {
     return new Publicacion(
         usuario,
-        publicacionDto.getContenido(),
-        publicacionDto.getFechaHora(),
-        publicacionDto.getFavs()
+        publicacionDto.getContenido()
         );
     }
 }

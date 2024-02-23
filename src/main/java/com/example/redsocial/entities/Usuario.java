@@ -1,6 +1,7 @@
 package com.example.redsocial.entities;
 
 import java.util.Date;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -18,7 +19,7 @@ import lombok.Data;
 public class Usuario {
     @Id
     @GeneratedValue
-    private Long id;    
+    private UUID id;    
 
     @NotBlank(message = "apodo es obligatorio")
     private String apodo;
@@ -35,6 +36,13 @@ public class Usuario {
     private Boolean bloqueado;
   
     public Usuario() {}
+
+    public Usuario(String apodo, Date fechaNacimiento) {
+        this.apodo = apodo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.numSeguidores = 0;
+        this.bloqueado = false;
+    }
 
     public Usuario(String apodo, Date fechaNacimiento, Integer numSeguidores, Boolean bloqueado) {
         this.apodo = apodo;

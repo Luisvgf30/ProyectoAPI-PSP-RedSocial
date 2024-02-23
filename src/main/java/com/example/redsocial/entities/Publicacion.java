@@ -1,6 +1,8 @@
 package com.example.redsocial.entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -22,7 +24,7 @@ import lombok.Data;
 public class Publicacion {
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -40,6 +42,13 @@ public class Publicacion {
     private Integer favs;
 
     public Publicacion() {}
+
+    public Publicacion(Usuario usuario, String contenido) {
+        this.usuario = usuario;
+        this.contenido = contenido;
+        this.fechaHora = new Date();
+        this.favs = 0;
+    }
 
     public Publicacion(Usuario usuario, String contenido, Date fechaHora, Integer favs) {
         this.usuario = usuario;

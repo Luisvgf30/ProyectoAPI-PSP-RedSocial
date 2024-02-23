@@ -21,19 +21,9 @@ public class CreatePublicacionDto {
     @NotBlank(message = "contenido es obligatorio")
     private String contenido;
 
-    @NotNull(message = "fechaNacimiento es obligatoria")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHora;
-
-    @NotNull(message = "favs es obligatorio")
-    private Integer favs;
-
     public CreatePublicacionDto() {}
 
-    public CreatePublicacionDto(String contenido, Date fechaHora, Integer favs) {
+    public CreatePublicacionDto(String contenido) {
         this.contenido = contenido;
-        this.fechaHora = fechaHora;
-        this.favs = favs;
     }
 }

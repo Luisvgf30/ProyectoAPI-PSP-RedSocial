@@ -1,6 +1,7 @@
 package com.example.redsocial.dtos;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,9 +18,11 @@ import lombok.Data;
 
 @Data
 public class GetPublicacionDto {
-    private Long id;
-    private Long usuario;
+    private UUID id;
+    private UUID usuario;
     private String contenido;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
     private Integer favs;
 
@@ -27,7 +30,7 @@ public class GetPublicacionDto {
     public GetPublicacionDto() {}
 
 
-    public GetPublicacionDto(Long id, Long usuario, String contenido, Date fechaHora, Integer favs) {
+    public GetPublicacionDto(UUID id, UUID usuario, String contenido, Date fechaHora, Integer favs) {
         this.id = id;
         this.usuario = usuario;
         this.contenido = contenido;

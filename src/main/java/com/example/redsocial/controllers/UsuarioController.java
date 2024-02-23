@@ -2,6 +2,7 @@ package com.example.redsocial.controllers;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +57,7 @@ public class UsuarioController {
 
   // Obtener un usuario por su ID (si existe)
   @GetMapping("/usuarios/{id}")
-  Usuario getUsuarioById(@NonNull @PathVariable Long id) {
+  Usuario getUsuarioById(@NonNull @PathVariable UUID id) {
     return repository
         .findById(id)
         .orElseThrow(() -> new UsuarioNotFoundException(id));
@@ -66,16 +67,12 @@ public class UsuarioController {
   @PutMapping("/usuarios/{id}")
   ResponseEntity<Usuario> putEmpleadoById(
       @NonNull @Valid @RequestBody CreateUsuarioDto nuevoUsuarioDto,
-      @NonNull @PathVariable Long id) {
+      @NonNull @PathVariable UUID id) {
     return repository
         .findById(id)
         .map(usuario -> {
             usuario.setApodo(nuevoUsuarioDto.getApodo());
-            usuario.setFechaNacimiento(nuevoUsuarioDto.getFechaNacimiento());
-            usuario.setNumSeguidores(nuevoUsuarioDto.getNumSeguidores());
-            usuario.setBloqueado(nuevoUsuarioDto.getBloqueado());
-
-        
+            usuario.setFechaNacimiento(nuevoUsuarioDto.getFechaNacimiento());  
           return new ResponseEntity<Usuario>(repository.save(usuario), HttpStatus.OK);
         })
         .orElseGet(() -> {
@@ -86,9 +83,9 @@ public class UsuarioController {
   }
 
   // Borrar un usuario por su ID
-  @DeleteMapping("/empleados/{id}")
+  @DeleteMapping("/usuarios/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  void deleteEmpleadoById(@NonNull @PathVariable Long id) {
+  void deleteUsuarioById(@NonNull @PathVariable UUID id) {
     repository.deleteById(id);
   }
 }

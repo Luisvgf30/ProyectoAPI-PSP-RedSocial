@@ -13,8 +13,6 @@ public class UsuarioMappers {
     public Usuario toUsuario(@NonNull CreateUsuarioDto usuarioDto) {
         return new Usuario(
             usuarioDto.getApodo(),
-            usuarioDto.getFechaNacimiento(),
-            usuarioDto.getNumSeguidores(),
-            usuarioDto.getBloqueado());
+            usuarioDto.getFechaNacimiento());
       }
 }

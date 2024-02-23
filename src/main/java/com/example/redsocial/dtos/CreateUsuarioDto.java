@@ -20,13 +20,18 @@ public class CreateUsuarioDto {
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @NotNull(message = "numSeguidores es obligatorio")
     private Integer numSeguidores;
 
-    @NotNull(message = "bloquear es obligatorio")
     private Boolean bloqueado;
   
     public CreateUsuarioDto() {}
+
+    public CreateUsuarioDto(String apodo, Date fechaNacimiento) {
+        this.apodo = apodo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.numSeguidores = 0;
+        this.bloqueado = false;
+    }
 
     public CreateUsuarioDto(String apodo, Date fechaNacimiento, Integer numSeguidores, Boolean bloqueado) {
         this.apodo = apodo;
@@ -34,4 +39,5 @@ public class CreateUsuarioDto {
         this.numSeguidores = numSeguidores;
         this.bloqueado = bloqueado;
     }
+
 }
